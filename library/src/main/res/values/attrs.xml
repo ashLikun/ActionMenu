@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ActionMenu Property -->
+    <declare-styleable name="AnimMenu">
+        <attr name="am_circleRadius" format="dimension" />
+        <attr name="am_dimens" format="dimension" />
+        <attr name="am_animDuration" format="integer" />
+        <attr name="am_buttonNormalColor" format="color" />
+        <attr name="am_buttonPressColor" format="color" />
+        <attr name="am_icon" format="reference" />
+        <attr name="am_onIcon" format="reference" />
+        <attr name="am_autoOpen" format="boolean" />
+        <attr name="am_badgeSize" format="dimension" />
+        <attr name="am_badgeColor" format="color" />
+        <attr name="am_expandDirect" />
+    </declare-styleable>
+
+    <!-- direct enum -->
+    <attr name="am_expandDirect">
+        <enum name="expandDirectTop" value="0" />
+        <enum name="expandDirectDown" value="1" />
+        <enum name="expandDirectLeft" value="2" />
+        <enum name="expandDirectRight" value="3" />
+    </attr>
+
+</resources>
