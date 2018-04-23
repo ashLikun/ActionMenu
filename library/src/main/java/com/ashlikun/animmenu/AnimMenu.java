@@ -38,7 +38,7 @@ public class AnimMenu extends ViewGroup {
     private boolean isOpen = false;
 
     private OnMenuItemClickListener itemClickListener;
-
+    OnMenuItemClickListener.OnMenuItemAnimListener itemAnimListener;
 
     public AnimMenu(Context context) {
         this(context, null);
@@ -312,13 +312,19 @@ public class AnimMenu extends ViewGroup {
     }
 
     public void addView(AnimMenuItem.Builder builder) {
+        AnimMenuItem view = builder.build();
         if (builder.isSwitchButton) {
-            addView(builder.build(), 0);
+            addView(view, 0);
         } else {
-            addView(builder.build());
+            addView(view);
         }
-
         childViewCount++;
+        if (itemClickListener != null) {
+            view.setItemClickListener(itemClickListener);
+        }
+        if (itemAnimListener != null) {
+            view.setItemAnimListener(itemAnimListener);
+        }
     }
 
     public AnimMenuItem.Builder getDefaultItem() {
@@ -362,6 +368,7 @@ public class AnimMenu extends ViewGroup {
         if (itemAnimListener == null) {
             return;
         }
+        this.itemAnimListener = itemAnimListener;
         for (int i = 0; i < childViewCount; i++) {
             AnimMenuItem view = (AnimMenuItem) getChildAt(i);
             view.setItemAnimListener(itemAnimListener);
