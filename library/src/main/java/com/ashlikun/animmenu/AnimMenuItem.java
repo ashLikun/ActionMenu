@@ -99,12 +99,18 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
         // bitmap
         mPaint.setFilterBitmap(true);
         if (builder.mBitmap != null) {
+            initBitmapPaint();
             canvas.drawBitmap(builder.isSwitchButton && isOpen ? builder.mOnBitmap : builder.mBitmap, null, mRect, mPaint);
         }
         if (builder.badge != null && builder.badge.length() > 0) {
             drawText(canvas);
         }
         super.onDraw(canvas);
+    }
+
+    private void initBitmapPaint() {
+        mPaint.setAlpha(0xff);
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
     private void drawText(Canvas canvas) {
