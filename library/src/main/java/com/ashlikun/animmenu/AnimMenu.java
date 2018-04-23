@@ -368,6 +368,84 @@ public class AnimMenu extends ViewGroup {
         }
     }
 
+    /**
+     * 需要在addView之前
+     */
+    public void setExpandDirect(int expandDirect) {
+        this.expandDirect = expandDirect;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setCircleRadius(int circleRadius) {
+        this.circleRadius = circleRadius;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setDimens(int dimens) {
+        this.dimens = dimens;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setBadgeSize(int badgeSize) {
+        this.badgeSize = badgeSize;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setBadgeColor(int badgeColor) {
+        this.badgeColor = badgeColor;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setNormalColor(int normalColor) {
+        this.normalColor = normalColor;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setPressColor(int pressColor) {
+        this.pressColor = pressColor;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setMenuIcon(int menuIcon) {
+        this.menuIcon = menuIcon;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setMenuOnIcon(int menuOnIcon) {
+        this.menuOnIcon = menuOnIcon;
+    }
+
+    /**
+     * 需要在addView之前
+     */
+    public void setAutoOpen(boolean autoOpen) {
+        this.autoOpen = autoOpen;
+    }
+
+
     public int dip2px(int dip) {
         float scale = getResources().getDisplayMetrics().density;
         return (int) (dip * scale + 0.5f * (dip >= 0 ? 1 : -1));

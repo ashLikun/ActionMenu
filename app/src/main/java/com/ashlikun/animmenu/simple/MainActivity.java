@@ -3,6 +3,7 @@ package com.ashlikun.animmenu.simple;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.ashlikun.animmenu.AnimMenu;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(int index, String tag) {
-
+                Log.e("aaa", index + tag);
             }
         });
     }
