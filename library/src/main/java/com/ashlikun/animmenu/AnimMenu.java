@@ -253,9 +253,11 @@ public class AnimMenu extends ViewGroup {
      * open menu
      */
     public void openMenu() {
-        isOpen = true;
-        for (int i = 0; i < childViewCount; i++) {
-            buttonItemOpenAnimation(i, (AnimMenuItem) getChildAt(i));
+        if (!isOpen) {
+            isOpen = true;
+            for (int i = 0; i < childViewCount; i++) {
+                buttonItemOpenAnimation(i, (AnimMenuItem) getChildAt(i));
+            }
         }
     }
 
@@ -263,9 +265,11 @@ public class AnimMenu extends ViewGroup {
      * close menu
      */
     public void closeMenu() {
-        isOpen = false;
-        for (int i = 0; i < childViewCount; i++) {
-            buttonItemCloseAnimation((AnimMenuItem) getChildAt(i));
+        if (isOpen) {
+            isOpen = false;
+            for (int i = 0; i < childViewCount; i++) {
+                buttonItemCloseAnimation((AnimMenuItem) getChildAt(i));
+            }
         }
     }
 

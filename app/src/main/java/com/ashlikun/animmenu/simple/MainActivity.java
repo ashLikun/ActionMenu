@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
                 .strokeWidth(3)
                 .strokeColor(Color.BLACK)
                 .iconId(R.drawable.add));
-        animMenu.addView(animMenu.getDefaultItem()
-                .strokeWidth(3)
-                .strokeColor(Color.BLACK)
-                .badge("1")
-                .iconId(R.drawable.like));
+//        animMenu.addView(animMenu.getDefaultItem()
+//                .strokeWidth(3)
+//                .strokeColor(Color.BLACK)
+//                .badge("1")
+//                .iconId(R.drawable.like));
 
         animMenu.setItemClickListener(new OnMenuItemClickListener() {
 
@@ -37,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        if (!animMenu.isOpen()) {
-            animMenu.openMenu();
-        } else {
-            animMenu.closeMenu();
-        }
+        animMenu.openMenu();
     }
 }
