@@ -13,7 +13,8 @@
         app:am_autoOpen="false"
         app:am_badgeColor="#ff5688ff"
         app:am_buttonNormalColor="#ff999999"
-        app:am_buttonPressColor="#ff999999"></com.ashlikun.animmenu.AnimMenu>
+        app:am_buttonPressColor="#ff999999"
+        app:am_icon="@drawable/close"></com.ashlikun.animmenu.AnimMenu>
 
 
     <Button
