@@ -182,6 +182,7 @@ public class AnimMenu extends ViewGroup {
                     break;
             }
             if (isOpen) {
+                setVisibility(VISIBLE);
                 view.setVisibility(View.VISIBLE);
             }
             propertyAnimator.start();
@@ -225,6 +226,10 @@ public class AnimMenu extends ViewGroup {
                 public void onAnimationEnd(Animator animation) {
                     if (!isOpen) {
                         view.setVisibility(View.GONE);
+                    }
+                    AnimMenuItem parentEnd = (AnimMenuItem) getChildAt(getChildCount() - 1);
+                    if (parentEnd == view && itemAnimListener != null) {
+                        itemAnimListener.onAnimationEnd(isOpen);
                     }
                 }
 

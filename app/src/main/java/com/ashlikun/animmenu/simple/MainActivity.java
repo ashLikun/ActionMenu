@@ -35,9 +35,19 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("aaa", index + tag);
             }
         });
+        animMenu.setItemAnimListener(new OnMenuItemClickListener.OnMenuItemAnimListener() {
+            @Override
+            public void onAnimationEnd(boolean isOpen) {
+                Log.e("aaa", "   isOpen = " + isOpen);
+            }
+        });
     }
 
     public void onClick(View view) {
-        animMenu.openMenu();
+        if (animMenu.isOpen()) {
+            animMenu.closeMenu();
+        } else {
+            animMenu.openMenu();
+        }
     }
 }

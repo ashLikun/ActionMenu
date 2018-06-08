@@ -289,15 +289,9 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (isOpen) {
-                    AnimMenuItem parentEnd = (AnimMenuItem) ((AnimMenu) getParent()).getChildAt(((AnimMenu) getParent()).getChildCount() - 1);
-                    if (parentEnd == AnimMenuItem.this && itemAnimListener != null) {
-                        itemAnimListener.onAnimationEnd(isOpen);
-                    }
-                } else {
-                    if (builder.isSwitchButton && itemAnimListener != null) {
-                        itemAnimListener.onAnimationEnd(isOpen);
-                    }
+                AnimMenuItem parentEnd = (AnimMenuItem) ((AnimMenu) getParent()).getChildAt(((AnimMenu) getParent()).getChildCount() - 1);
+                if (parentEnd == AnimMenuItem.this && itemAnimListener != null) {
+                    itemAnimListener.onAnimationEnd(isOpen);
                 }
             }
 
