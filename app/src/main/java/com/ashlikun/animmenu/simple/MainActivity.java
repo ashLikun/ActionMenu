@@ -3,11 +3,9 @@ package com.ashlikun.animmenu.simple;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.ashlikun.animmenu.AnimMenu;
-import com.ashlikun.animmenu.OnMenuItemClickListener;
 
 public class MainActivity extends AppCompatActivity {
     AnimMenu animMenu;
@@ -17,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         animMenu = findViewById(R.id.animMenu);
+        animMenu.setAutoOpen(true);
+        animMenu.setClickable(true);
         animMenu.addView(animMenu.getDefaultItem()
                 .strokeWidth(3)
                 .strokeColor(Color.BLACK)
@@ -26,21 +26,6 @@ public class MainActivity extends AppCompatActivity {
                 .strokeColor(Color.BLACK)
                 .badge("1")
                 .iconId(R.drawable.like));
-
-        animMenu.setItemClickListener(new OnMenuItemClickListener() {
-
-
-            @Override
-            public void onItemClick(int index, String tag) {
-                Log.e("aaa", index + tag);
-            }
-        });
-        animMenu.setItemAnimListener(new OnMenuItemClickListener.OnMenuItemAnimListener() {
-            @Override
-            public void onAnimationEnd(boolean isOpen) {
-                Log.e("aaa", "   isOpen = " + isOpen);
-            }
-        });
     }
 
     public void onClick(View view) {

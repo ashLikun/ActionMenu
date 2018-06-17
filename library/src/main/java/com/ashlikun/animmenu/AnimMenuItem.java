@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -34,7 +33,6 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
     private Paint mPaint;
     private TextPaint mTextPaint;
     private Path mPath;
-    private Matrix matrix;
     private float strokeScale;
     private float factor;
     private float offSet;
@@ -60,7 +58,6 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
 
     private void init() {
         mPaint = new Paint();
-        matrix = new Matrix();
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
 
@@ -71,7 +68,7 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
         mTextPaint.setAntiAlias(true);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
-        strokeScale = 1 - builder.strokeWidth / (builder.circleRadius * 2f);
+
         mPath = new Path();
         extra = (int) (builder.circleRadius * 2 * factor / 5);
         offSet = builder.circleRadius * 2 / 3.6f;
@@ -88,10 +85,9 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
         canvas.drawPath(mPath, mPaint);
         if (builder.isDrawStroke) {
             initStrokePaint();
-            matrix.setScale(strokeScale, strokeScale,
-                    mRect.centerX(), mRect.centerY());
             canvas.save();
-            canvas.setMatrix(matrix);
+            canvas.scale(strokeScale, strokeScale,
+                    mRect.centerX(), mRect.centerY());
             canvas.drawPath(mPath, mPaint);
             canvas.restore();
         }
@@ -276,6 +272,8 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
         mPaint.setColor(builder.strokeColor);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(builder.strokeWidth);
+        //设置边框缩放，要不然可能绘制不全
+        strokeScale = 1 - builder.strokeWidth / (builder.circleRadius * 2f);
     }
 
 
