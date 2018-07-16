@@ -63,7 +63,7 @@ public class AnimMenu extends ViewGroup {
 
                 case expandDirectTop:
                     l = 0;
-                    t = (circleRadius * 2 + dimens) * (childViewCount - 1) + circleRadius * 2;
+                    t = (circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize();
                     if (isRootItem(items)) {
                         t -= dimens;
                     }
@@ -82,7 +82,7 @@ public class AnimMenu extends ViewGroup {
                     break;
 
                 case expandDirectLeft:
-                    l = (circleRadius * 2 + dimens) * (childViewCount - 1) + circleRadius * 2;
+                    l = (circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize();
                     if (isRootItem(items)) {
                         l -= dimens;
                     }
@@ -105,21 +105,31 @@ public class AnimMenu extends ViewGroup {
         }
     }
 
+    /**
+     * 获取动画超过部分的大小
+     *
+     * @return
+     */
+    private int getSpringSize() {
+        if (childViewCount > 0) {
+            if (childViewCount == 1 && ((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
+                return (int) (circleRadius / 2.5f);
+            }
+            return (int) (circleRadius / 1.58f);
+        }
+        return 0;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width, height;
         if (expandDirect == expandDirectTop || expandDirect == expandDirectDown) {
             width = circleRadius * 3;
-            height = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 * 2;
-            if (childViewCount > 0 && !((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
-                height += circleRadius / 4;
-            }
+            height = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
+
         } else {
-            width = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 * 2;
+            width = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
             height = circleRadius * 3;
-            if (childViewCount > 0 && !((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
-                width += circleRadius / 4;
-            }
         }
         width += getPaddingLeft() + getPaddingRight();
         height += getPaddingTop() + getPaddingBottom();
@@ -169,13 +179,13 @@ public class AnimMenu extends ViewGroup {
 
             switch (expandDirect) {
                 case expandDirectTop:
-                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + circleRadius * 2);
+                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + getSpringSize());
                     break;
                 case expandDirectDown:
                     propertyAnimator.y(circleRadius * 2 * index + dimens * (index - 1));
                     break;
                 case expandDirectLeft:
-                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + circleRadius * 2);
+                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + getSpringSize());
                     break;
                 case expandDirectRight:
                     propertyAnimator.x(circleRadius * 2 * index + dimens * (index - 1));
