@@ -119,7 +119,7 @@ public class AnimMenu extends ViewGroup {
                     return 0;
                 }
             }
-            return (int) (circleRadius / 1.58f);
+            return (int) (circleRadius / 4f) * childViewCount;
         }
         return 0;
     }
