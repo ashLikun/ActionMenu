@@ -112,8 +112,12 @@ public class AnimMenu extends ViewGroup {
      */
     private int getSpringSize() {
         if (childViewCount > 0) {
-            if (childViewCount == 1 && ((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
-                return (int) (circleRadius / 2.5f);
+            if (childViewCount == 1) {
+                if (((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
+                    return (int) (circleRadius / 2.5f);
+                } else {
+                    return 0;
+                }
             }
             return (int) (circleRadius / 1.58f);
         }
@@ -126,9 +130,10 @@ public class AnimMenu extends ViewGroup {
         if (expandDirect == expandDirectTop || expandDirect == expandDirectDown) {
             width = circleRadius * 3;
             height = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
-
+            height = Math.max(0, height);
         } else {
             width = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
+            width = Math.max(0, width);
             height = circleRadius * 3;
         }
         width += getPaddingLeft() + getPaddingRight();
@@ -214,13 +219,13 @@ public class AnimMenu extends ViewGroup {
 
             switch (expandDirect) {
                 case expandDirectTop:
-                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1) + circleRadius * 2);
+                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize());
                     break;
                 case expandDirectDown:
                     propertyAnimator.y(dimens * (-1));
                     break;
                 case expandDirectLeft:
-                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1) + circleRadius * 2);
+                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize());
                     break;
                 case expandDirectRight:
                     propertyAnimator.x(dimens * (-1));
