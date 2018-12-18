@@ -24,10 +24,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.designVersion
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    //compile project(':animmenu')
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation project(':library')
     implementation ('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
