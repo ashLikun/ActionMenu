@@ -21,9 +21,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly rootProject.ext.designVersion
-    compileOnly ('com.alibaba.android:vlayout:1.2.8@aar') {
-        transitive = true
-    }
 }
 
 apply from: '../maven.gradle'
