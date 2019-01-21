@@ -34,7 +34,6 @@ public class AnimMenu extends ViewGroup {
     private int menuOnIcon;
     private boolean autoOpen = true;
 
-    private int childViewCount;             // button count
     private boolean isOpen = false;
 
     private OnMenuItemClickListener itemClickListener;
@@ -56,14 +55,14 @@ public class AnimMenu extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        for (int i = 0; i < childViewCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             AnimMenuItem items = (AnimMenuItem) getChildAt(i);
 
             switch (expandDirect) {
 
                 case expandDirectTop:
                     l = 0;
-                    t = (circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize();
+                    t = (circleRadius * 2 + dimens) * (getChildCount() - 1) + getSpringSize();
                     if (isRootItem(items)) {
                         t -= dimens;
                     }
@@ -82,7 +81,7 @@ public class AnimMenu extends ViewGroup {
                     break;
 
                 case expandDirectLeft:
-                    l = (circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize();
+                    l = (circleRadius * 2 + dimens) * (getChildCount() - 1) + getSpringSize();
                     if (isRootItem(items)) {
                         l -= dimens;
                     }
@@ -111,15 +110,15 @@ public class AnimMenu extends ViewGroup {
      * @return
      */
     private int getSpringSize() {
-        if (childViewCount > 0) {
-            if (childViewCount == 1) {
+        if (getChildCount() > 0) {
+            if (getChildCount() == 1) {
                 if (((AnimMenuItem) getChildAt(0)).isSwitchButton()) {
                     return (int) (circleRadius / 2.5f);
                 } else {
                     return 0;
                 }
             }
-            return (int) (circleRadius / 4f) * childViewCount;
+            return (int) (circleRadius / 4f) * getChildCount();
         }
         return 0;
     }
@@ -129,10 +128,10 @@ public class AnimMenu extends ViewGroup {
         int width, height;
         if (expandDirect == expandDirectTop || expandDirect == expandDirectDown) {
             width = circleRadius * 3;
-            height = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
+            height = (getChildCount() - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
             height = Math.max(0, height);
         } else {
-            width = (childViewCount - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
+            width = (getChildCount() - 1) * (circleRadius * 2 + dimens) + circleRadius * 2 + getSpringSize();
             width = Math.max(0, width);
             height = circleRadius * 3;
         }
@@ -158,7 +157,6 @@ public class AnimMenu extends ViewGroup {
         menuIcon = typedArray.getResourceId(R.styleable.AnimMenu_am_icon, -1);
         menuOnIcon = typedArray.getResourceId(R.styleable.AnimMenu_am_onIcon, menuIcon);
         autoOpen = typedArray.getBoolean(R.styleable.AnimMenu_am_autoOpen, autoOpen);
-        childViewCount = 0;
         // add root button
         if (menuIcon != -1) {
             addView(getDefaultItem()
@@ -184,13 +182,13 @@ public class AnimMenu extends ViewGroup {
 
             switch (expandDirect) {
                 case expandDirectTop:
-                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + getSpringSize());
+                    propertyAnimator.y((circleRadius * 2 + dimens) * (getChildCount() - 1 - index) + getSpringSize());
                     break;
                 case expandDirectDown:
                     propertyAnimator.y(circleRadius * 2 * index + dimens * (index - 1));
                     break;
                 case expandDirectLeft:
-                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1 - index) + getSpringSize());
+                    propertyAnimator.x((circleRadius * 2 + dimens) * (getChildCount() - 1 - index) + getSpringSize());
                     break;
                 case expandDirectRight:
                     propertyAnimator.x(circleRadius * 2 * index + dimens * (index - 1));
@@ -219,13 +217,13 @@ public class AnimMenu extends ViewGroup {
 
             switch (expandDirect) {
                 case expandDirectTop:
-                    propertyAnimator.y((circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize());
+                    propertyAnimator.y((circleRadius * 2 + dimens) * (getChildCount() - 1) + getSpringSize());
                     break;
                 case expandDirectDown:
                     propertyAnimator.y(dimens * (-1));
                     break;
                 case expandDirectLeft:
-                    propertyAnimator.x((circleRadius * 2 + dimens) * (childViewCount - 1) + getSpringSize());
+                    propertyAnimator.x((circleRadius * 2 + dimens) * (getChildCount() - 1) + getSpringSize());
                     break;
                 case expandDirectRight:
                     propertyAnimator.x(dimens * (-1));
@@ -275,7 +273,7 @@ public class AnimMenu extends ViewGroup {
     public void openMenu() {
         if (!isOpen) {
             isOpen = true;
-            for (int i = 0; i < childViewCount; i++) {
+            for (int i = 0; i < getChildCount(); i++) {
                 buttonItemOpenAnimation(i, (AnimMenuItem) getChildAt(i));
             }
         }
@@ -283,7 +281,7 @@ public class AnimMenu extends ViewGroup {
 
     public void openMenuNoCheckOpen() {
         isOpen = true;
-        for (int i = 0; i < childViewCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             buttonItemOpenAnimation(i, (AnimMenuItem) getChildAt(i));
         }
     }
@@ -294,7 +292,7 @@ public class AnimMenu extends ViewGroup {
     public void closeMenu() {
         if (isOpen) {
             isOpen = false;
-            for (int i = 0; i < childViewCount; i++) {
+            for (int i = 0; i < getChildCount(); i++) {
                 buttonItemCloseAnimation((AnimMenuItem) getChildAt(i));
             }
         }
@@ -302,7 +300,7 @@ public class AnimMenu extends ViewGroup {
 
     public void closeMenuNoCheckOpen() {
         isOpen = false;
-        for (int i = 0; i < childViewCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             buttonItemCloseAnimation((AnimMenuItem) getChildAt(i));
         }
     }
@@ -338,7 +336,6 @@ public class AnimMenu extends ViewGroup {
         } else {
             addView(view);
         }
-        childViewCount++;
         if (itemClickListener != null) {
             view.setItemClickListener(itemClickListener);
         }
@@ -349,7 +346,7 @@ public class AnimMenu extends ViewGroup {
 
     public AnimMenuItem.Builder getDefaultItem() {
         return new AnimMenuItem.Builder(context)
-                .index(childViewCount)
+                .index(getChildCount())
                 .circleRadius(circleRadius)
                 .dimens(dimens)
                 .isAutoOpen(autoOpen)
@@ -378,7 +375,7 @@ public class AnimMenu extends ViewGroup {
             return;
         }
         this.itemClickListener = itemClickListener;
-        for (int i = 0; i < childViewCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             AnimMenuItem view = (AnimMenuItem) getChildAt(i);
             view.setItemClickListener(itemClickListener);
         }
@@ -389,7 +386,7 @@ public class AnimMenu extends ViewGroup {
             return;
         }
         this.itemAnimListener = itemAnimListener;
-        for (int i = 0; i < childViewCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             AnimMenuItem view = (AnimMenuItem) getChildAt(i);
             view.setItemAnimListener(itemAnimListener);
         }
