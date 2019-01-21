@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         animMenu.setAutoOpen(true);
         animMenu.setClickable(true);
         animMenu.addView(animMenu.getDefaultItem()
-                .strokeWidth(3)
+                .strokeWidth(0)
                 .strokeColor(Color.BLACK)
                 .iconId(R.drawable.add));
 

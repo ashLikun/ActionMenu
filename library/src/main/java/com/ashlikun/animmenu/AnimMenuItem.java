@@ -524,13 +524,17 @@ public class AnimMenuItem extends View implements ValueAnimator.AnimatorUpdateLi
 
         public Builder strokeWidth(float val) {
             strokeWidth = val;
-            isDrawStroke = true;
+            if (strokeWidth > 0) {
+                isDrawStroke = true;
+            }
             return this;
         }
 
         public Builder strokeColor(int val) {
             strokeColor = val;
-            isDrawStroke = true;
+            if (strokeWidth > 0) {
+                isDrawStroke = true;
+            }
             return this;
         }
 
