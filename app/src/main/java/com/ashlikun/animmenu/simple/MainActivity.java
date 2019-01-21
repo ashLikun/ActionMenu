@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         animMenu.addView(animMenu.getDefaultItem()
                 .strokeWidth(0)
                 .strokeColor(Color.BLACK)
-                .iconId(R.drawable.add));
+                .iconId(R.mipmap.ic_launcher_round));
 
     }
 
